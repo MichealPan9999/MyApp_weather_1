@@ -6,10 +6,13 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.Calendar;
+import java.util.List;
 
+import demo1.panzq.com.myapp_weather_1.bean.City;
+import demo1.panzq.com.myapp_weather_1.db.CityDB;
 import demo1.panzq.com.myapp_weather_1.log.MLog;
-import util.Lunar;
-import util.TimeUtil;
+import demo1.panzq.com.myapp_weather_1.util.Lunar;
+import demo1.panzq.com.myapp_weather_1.util.TimeUtil;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private MyApplication mApplication;
@@ -54,7 +57,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 MLog.d(" "+ TimeUtil.getDay(System.currentTimeMillis()));
                 break;
             case R.id.list_cities:
-
+                CityDB cityDB = new CityDB(mApplication,MyApplication.DB_PATH);
+                List<City> allCity = cityDB.getAllCity();
+                for(City city:allCity)
+                {
+                    MLog.d(city.toString());
+                }
                 break;
         }
     }
